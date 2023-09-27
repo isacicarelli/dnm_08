@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="style.css" />
+        <title>DNOO37 | EVALUACIÓN Nº2</title>
+    </head>
+    <body>
+        <nav>
+            <h1><a href="index.html">ISABELLA CICARELLI</a></h1>
+            <select onchange="location = this.value;">
+                <option value="index.html">INDEX</option>
+                <option value="integrantes.html" selected>INTEGRANTES</option>
+                <option value="openweather.html">OPEN WEATHER</option>
+                <option value="picture.html">PICTURE OF THE DAY</option>
+                <option value="sismico.html">SÍSMICO</option>
+            </select>
+        </nav>
+        <header style="display: none;">
+            <div>Marque uno:</div>
+            <div><input type="radio" name="selecciona" value="todos" />Todos</div>
+            <div><input type="radio" name="selecciona" value="Sagitario" />Sagitario</div>
+            <div><input type="radio" name="selecciona" value="Aries" />Aries</div>
+            <div><input type="radio" name="selecciona" value="Leo" />Leo</div>
+        </header>
+        <aside></aside>
+        <main></main>
+        <script>
+            const alternativas = document.querySelector("header");
+            const detalles = document.querySelector("aside");
+            const respuesta = document.querySelector("main");
+            var datos;
+            async function estudiantes() {
+                const data = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_curso.json");
+                datos = await data.json();
+                alternativas.removeAttribute("style");
+                console.log(datos);
+                signos = [];
+                datos.forEach((x) => {
+                    if(x.github !== ""){
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                        signos.push(x.zodiaco.signo);
+                    }
+                });
+
+
+    const counts = {};
+    signos.forEach((x) => {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+    console.log(counts)
+
+
+
+            }
+            estudiantes().catch((error) => console.error(error));
+
+            function compatibilidad(valor) {
+                respuesta.innerHTML = ``;
+                detalles.innerHTML = ``;
+
+                //Lo que sigue lo saqué de https://www.clara.es/
+
+                if (valor == "Sagitario") {
+                    about =
+                        "<em>Sagitario: </em>Un signo que se caracteriza por la aventura, ama hacer lo que le da la gana sin tener que rendirle cuentas a nadie. Disfruta muchísimo al explorar nuevos sitios y romper con la rutina, no se lleva bien con lo predecible. Es optimista, sin esfuerzo, no se engancha con lo malo, antes de quejarse se centra en una solución. Además, es intenso, entusiasta y no le gusta distraerse de sus objetivos. Sagitario, está acostumbrado a decir la verdad, puede decir lo primero que le venga a la mente sin rodeos, no importa si eso significa que su número de relaciones disminuya, jamás se queda con la gente falsa.";
+                } else if (valor == "Leo") {
+                    about =
+                        "<em>Leo: </em>Un signo que es imposible ignorar, en verdad su presencia es imponente, hace que muchos se pregunten quién es y ese misterio lo vuelve un imán. Además, su alegría es clara, contagia y tiene un sentido del humor que rompe con cualquier tipo de tensión. Leo es el tipo de persona que no se sabe cómo lo hace, pero logra que alguien que la está pasando muy mal suelte una carcajada en medio del dolor. Esa luz no se compara con nada y es por ello que muchísimas personas valoran su compañía. En definitiva, irradia confianza, porque sabe lo que quiere y no se deja manipular. Es de los que prefiere perder antes que convertirse en la marioneta de otros.";
+                } else if (valor == "Aries") {
+                    about =
+                        "<em>Aries: </em>Un signo al que le gusta hacer las cosas a su estilo, jamás se le ha dado eso de seguir a la manada, ser líder es parte de su naturaleza. Le ha costado muchísimo poner sobre la mesa lo que le gusta y lo que no como para permitir que alguien decida por él. En definitiva, no está aquí para darle gusto a nadie y quien intente manipularlo va a tener que prepararse para lidiar con su mal carácter. Desde luego, eso no significa que sea cruel, su alma es noble y su corazón siempre está al pie del cañón de quien lo necesita. Su objetivo en esta vida es claro, vivir sin importar el qué dirán, no hay más.";
+                } else {
+                    about = "Diseño y nuevos medios."
+                }
+
+                detalles.innerHTML += `<div><p>${about}</p></div>`;
+
+                datos.forEach((x) => {
+                    if (valor == x.zodiaco.signo) {
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                    }
+                     else if (valor == x.zodiaco.modalidad) {
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                    }
+                });
+            }
+
+            const seleccionado = document.querySelectorAll('input[name="selecciona"]');
+
+            seleccionado.forEach((i) => {
+                i.addEventListener("change", function () {
+                    var valor = this.value;
+                    if (valor !== "todos"){
+                        console.log(valor);
+                        compatibilidad(valor);
+                    } else {
+                        window.location.reload();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
