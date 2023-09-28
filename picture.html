@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="style.css" />
+        <title>DNOO37 | EVALUACIÓN Nº2</title>
+    </head>
+    <body>
+        <nav>
+            <h1><a href="index.html">ISABELLA CICARELLI</a></h1>
+            <select onchange="location = this.value;">
+                <option value="index.html">INDEX</option>
+                <option value="integrantes.html">INTEGRANTES</option>
+                <option value="openweather.html">OPEN WEATHER</option>
+                <option value="picture.html" selected>PICTURE OF THE DAY</option>
+                <option value="sismico.html">SÍSMICO</option>
+            </select>
+        </nav>
+        <section style="min-height: 80vh">
+            <blockquote></blockquote>
+        </section>
+        <script>
+            document.querySelector("blockquote").innerHTML = "<em>31 de Agosto, 1997</em>: La Princesa Diana, cuyo nombre completo era Diana Frances Spencer, murió en un trágico accidente automovilístico el 31 de agosto de 1997. El accidente ocurrió en el Pont de l'Alma, un puente en París, Francia. Diana estaba viajando en un automóvil con su compañero, Dodi Al-Fayed, y su conductor, Henri Paul, cuando el vehículo perdió el control y chocó contra una columna en el túnel del puente. <br> <br> La Princesa Diana y Dodi Al-Fayed murieron en el lugar del accidente debido a las lesiones que sufrieron en el choque. El conductor, Henri Paul, también falleció en el accidente. La única sobreviviente del accidente fue la guardaespaldas de Diana, Trevor Rees-Jones, quien sufrió graves lesiones pero logró recuperarse. <br> <br> El accidente automovilístico y la posterior muerte de la Princesa Diana conmocionaron al mundo y generaron una gran cantidad de especulación y teorías de conspiración. La investigación oficial llevada a cabo por las autoridades francesas concluyó que el accidente se debió a la alta velocidad y al consumo de alcohol por parte del conductor, Henri Paul, quien estaba tratando de evadir a los paparazzi que perseguían el automóvil de Diana."
+            document.body.style.backgroundImage = "url(ladydi.webp)"
+            document.body.style.backgroundPosition = "center center";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundOpacity = "0.5"
+        </script>
+    </body>
+</html>
